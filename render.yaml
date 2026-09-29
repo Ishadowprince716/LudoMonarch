@@ -1,0 +1,19 @@
+version: 1
+name: ludo-monarch
+services:
+  - type: web
+    name: ludo-monarch
+    env: node
+    buildCommand: cd server && npm install && npm run build
+    startCommand: node dist/server.js
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: CLIENT_URL
+        value: https://ludo-monarch.vercel.app
+  - type: static
+    name: ludo-monarch-frontend
+    env: vercel
+    path: client
+    buildCommand: npm install && npm run build
+    startCommand: npx serve dist
