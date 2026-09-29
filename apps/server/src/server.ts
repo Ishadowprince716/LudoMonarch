@@ -3,12 +3,11 @@ import cors from "cors";
 import http from "http";
 import path from "path";
 import { Server } from "socket.io";
-import { PrismaClient } from "@prisma/client";
 import { createClient, RedisClientType } from "redis";
 import healthRouter from "./routes/health";
+import { authRouter } from "./routes/auth";
 import { registerGameSocket } from "./socket/gameSocket";
-
-export const prisma = new PrismaClient();
+import { prisma } from "./prisma";
 
 let pubClient: RedisClientType | null = null;
 let subClient: RedisClientType | null = null;
@@ -31,6 +30,7 @@ const app = express();
 app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
 app.use(express.json());
 app.use("/api", healthRouter);
+app.use("/api/auth", authRouter);
 
 // Serve built frontend static files
 app.use(express.static(path.join(__dirname, "../../client/dist")));

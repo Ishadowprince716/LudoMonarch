@@ -1,37 +1,21 @@
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGameSocket } from "../hooks/useGameSocket";
+import { useAuth } from "../context/AuthContext";
 import Board from "../components/Board";
 
 export default function GamePage() {
   const { roomId } = useParams<{ roomId: string }>();
-  const [searchParams] = useSearchParams();
-  const playerName = searchParams.get("name") || "Player";
+  const { user } = useAuth();
+  const playerName = user?.username || "Player";
   const { game, error, rollDice, movePiece } = useGameSocket();
   const [inputRoomId, setInputRoomId] = useState(roomId || "");
 
   if (!game) {
     return (
       <div style={{ padding: 40, textAlign: "center" }}>
-        <h2>Join a Game</h2>
-        <input
-          value={inputRoomId}
-          onChange={(e) => setInputRoomId(e.target.value.toUpperCase())}
-          placeholder="Enter Room Code"
-          style={{ padding: 10, fontSize: 18, textTransform: "uppercase", letterSpacing: 4 }}
-        />
-        <br /><br />
-        <button
-          onClick={() => {
-            if (inputRoomId) {
-              // join handled by useGameSocket - need to trigger join
-              window.location.reload();
-            }
-          }}
-          style={{ padding: "10px 24px", fontSize: 16, cursor: "pointer" }}
-        >
-          Join Game
-        </button>
+        <h2>Joining room {inputRoomId}…</h2>
+        {error && <p style={{ color: "#e74c3c" }}>{error}</p>}
       </div>
     );
   }

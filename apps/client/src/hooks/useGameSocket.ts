@@ -11,12 +11,17 @@ const socket: Socket = io(
 export function useGameSocket() {
   const [game, setGame] = useState<GameState | null>(null);
   const [error, setError] = useState("");
+  const [connected, setConnected] = useState(false);
 
   useEffect(() => {
+    socket.on("connect", () => setConnected(true));
+    socket.on("disconnect", () => setConnected(false));
     socket.on("game-updated", setGame);
     socket.on("game-error", ({ message }: { message: string }) => setError(message));
 
     return () => {
+      socket.off("connect");
+      socket.off("disconnect");
       socket.off("game-updated");
       socket.off("game-error");
     };
@@ -48,5 +53,5 @@ export function useGameSocket() {
     });
   }, []);
 
-  return { game, error, createGame, joinGame, rollDice, movePiece, createAIGame, setError };
+  return { game, error, connected, createGame, joinGame, rollDice, movePiece, createAIGame, setError };
 }
