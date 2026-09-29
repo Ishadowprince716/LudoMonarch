@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import http from "http";
+import path from "path";
 import { Server } from "socket.io";
 import { PrismaClient } from "@prisma/client";
 import { createClient, RedisClientType } from "redis";
@@ -30,6 +31,14 @@ const app = express();
 app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
 app.use(express.json());
 app.use("/api", healthRouter);
+
+// Serve built frontend static files
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// SPA catch-all: serve index.html for any non-API, non-Socket route
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+});
 
 const httpServer = http.createServer(app);
 
