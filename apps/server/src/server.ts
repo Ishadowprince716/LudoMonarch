@@ -33,11 +33,11 @@ app.use(express.json());
 app.use("/api", healthRouter);
 
 // Serve built frontend static files
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 // SPA catch-all: serve index.html for any non-API, non-Socket route
 app.get("*", (_req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
 });
 
 const httpServer = http.createServer(app);
