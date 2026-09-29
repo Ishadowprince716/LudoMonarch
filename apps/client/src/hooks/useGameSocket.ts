@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
-import { GameState } from "../game/types";
+import { GameState } from "@ludo/shared";
 
 const socket: Socket = io(
   import.meta.env.VITE_SERVER_URL || "http://localhost:3000"

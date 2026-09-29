@@ -1,5 +1,5 @@
 import React from "react";
-import { Color } from "../game/types";
+import { Color } from "@ludo/shared";
 
 const COLORS: Record<Color, string> = {
   red: "#e74c3c",

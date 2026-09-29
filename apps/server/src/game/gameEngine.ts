@@ -1,4 +1,4 @@
-import { GameState, Player } from "../types";
+import { GameState, Player } from "@ludo/shared";
 import { rollDice, getCurrentPlayer, movePiece, getLegalMoves } from "./gameRules";
 
 export function createInitialGame(roomId: string, playerName: string, playerId: string): GameState {

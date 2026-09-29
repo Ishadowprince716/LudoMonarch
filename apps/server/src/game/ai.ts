@@ -1,4 +1,4 @@
-import { GameState, Player } from "../types";
+import { GameState, Player } from "@ludo/shared";
 import { getCurrentPlayer, getLegalMoves } from "./gameRules";
 
 export function chooseAIMove(game: GameState, aiPlayerId: string): number | null {

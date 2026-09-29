@@ -1,0 +1,20 @@
+{
+  "name": "ludo-monarch",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "dev:client": "turbo run dev --filter=@ludo/client",
+    "dev:server": "turbo run dev --filter=@ludo/server",
+    "test:server": "turbo run test --filter=@ludo/server"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.4"
+  },
+  "packageManager": "npm@10.9.2"
+}

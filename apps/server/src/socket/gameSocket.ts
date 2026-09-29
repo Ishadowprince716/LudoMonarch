@@ -1,5 +1,6 @@
 import { Server as SocketIOServer, Socket } from "socket.io";
-import { GameState } from "../types";
+import { GameState } from "@ludo/shared";
+import { PrismaClient } from "@prisma/client";
 import {
   createInitialGame,
   addPlayerToGame,
@@ -12,7 +13,7 @@ import { rollDice } from "../game/gameRules";
 
 const games = new Map<string, GameState>();
 
-export function registerGameSocket(io: SocketIOServer, socket: Socket): void {
+export function registerGameSocket(io: SocketIOServer, socket: Socket, prisma: PrismaClient): void {
   socket.on("create-game", ({ playerName }: { playerName: string }, callback) => {
     const roomId = Math.random().toString(36).substring(2, 8).toUpperCase();
     const game = createInitialGame(roomId, playerName, socket.id);

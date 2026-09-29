@@ -1,4 +1,4 @@
-import { GameState, Player } from "../types";
+import { GameState, Player } from "@ludo/shared";
 import { BOARD_SIZE, HOME_LANE_START, FINISHED_POSITION, PIECES_PER_PLAYER } from "./constants";
 
 export function rollDice(): number {

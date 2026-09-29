@@ -1,5 +1,5 @@
 import React from "react";
-import { GameState, Color } from "../game/types";
+import { GameState, Color } from "@ludo/shared";
 import Dice from "./Dice";
 import PlayerPanel from "./PlayerPanel";
 
