@@ -3,7 +3,9 @@ import { io, Socket } from "socket.io-client";
 import { GameState } from "@ludo/shared";
 
 const socket: Socket = io(
-  import.meta.env.VITE_SERVER_URL || "http://localhost:3000"
+  typeof window !== "undefined" && window.location.origin
+    ? window.location.origin
+    : (import.meta.env.VITE_SERVER_URL || "http://localhost:3000")
 );
 
 export function useGameSocket() {
