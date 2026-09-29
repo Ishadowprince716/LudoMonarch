@@ -10,7 +10,11 @@ services:
       - key: PORT
         value: 5000
       - key: CLIENT_URL
-        value: https://ludo-monarch.onrender.com
+        value: your-frontend-url-here
+      - key: DATABASE_URL
+        value: your-postgres-connection-string-here
+      - key: REDIS_URL
+        value: your-redis-url-here
       - key: NODE_ENV
         value: production
     region: oregon
